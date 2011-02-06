@@ -1,0 +1,12 @@
+!!! 5
+%html{ lang: r18n.locale.code }
+  %head
+    %meta( charset="UTF-8" )
+    %title= t.title
+    = csrf_meta_tag
+    
+    = include_stylesheets :application
+    = include_javascripts :application
+    
+  %body
+    = yield
