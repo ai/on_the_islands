@@ -9,4 +9,13 @@
     = include_javascripts :application
     
   %body
+    - flash.each_pair do |key, message|
+      - if message
+        = "#{key}:"
+        = message.html_safe
+    
     = yield
+    
+    - if signed_in?
+      - form_tag sessions_path, method: :delete do
+        = submit_tag t.exit

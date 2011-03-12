@@ -1,0 +1,7 @@
+%div
+  %a( href="/auth/google" ) Google
+%div
+  %a( href="/auth/facebook" ) Facebook
+%form( action="/auth/open_id" method="get" )
+  %input( type="url" name="openid_url" )
+  %input( type="submit" value="OpenID" )

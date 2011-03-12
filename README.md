@@ -23,7 +23,6 @@
        sudo apt-add-repository ppa:chris-lea/node.js
        sudo apt-get update
        sudo apt-get install nodejs
-       sudo ln -s /usr/bin/nodejs /usr/bin/node
    
 5. Install all dependency gems:
    

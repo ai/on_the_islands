@@ -1,1 +1,12 @@
 title: On The Islands
+
+signin:
+  created: Welcome. Robot generate login %1 for you.
+  empty_email:
+    Ypur OpenID doesn’t provide e-mail. Use another signin method.
+  occupied_email:
+    Your e-mail %1 is already occupied by another user. If it’s you occupied it,
+    <a href="/auth/%2">Signin by %1</a> and link this account.
+  add: Your account %3 on %2 was linked to %1 user
+
+exit: Exit
