@@ -2,8 +2,9 @@ javascript_compressor: closure
 
 javascripts:
   application:
-    - public/javascripts/app/controls.js
     - public/javascripts/app/application.js
+    - public/javascripts/app/controls.js
+    - public/javascripts/app/auth.js
 
 stylesheets:
   application:
