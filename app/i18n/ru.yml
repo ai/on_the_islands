@@ -1,6 +1,11 @@
-title: На островах — On The Islands
+name:
+  title: На островах — On The Islands
+  header: На островах
+  with_user: "%1 на островах"
 
 signin:
+  title: Войти через
+  openid_submit: Войти
   created: Добро пожаловать. Робот выбал вам логин %1.
   empty_email:
     Ваш OpenID не сообщил адрес эл. почты. Войдите с помощью другого способа.

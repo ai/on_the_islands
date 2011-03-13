@@ -1,12 +1,17 @@
-title: On The Islands
+name:
+  title: On Te Islands
+  header: On The Islands
+  with_user: "%1 On The Islands"
 
 signin:
+  title: Sign In by
+  openid_submit: Sign In
   created: Welcome. Robot generate login %1 for you.
   empty_email:
-    Ypur OpenID doesn’t provide e-mail. Use another signin method.
+    Your OpenID doesn’t provide e-mail. Use another signin method.
   occupied_email:
     Your e-mail %1 is already occupied by another user. If it’s you occupied it,
-    <a href="/auth/%2">Signin by %1</a> and link this account.
+    <a href="/auth/%2">sign in by %1</a> and link this account.
   add: Your account %3 on %2 was linked to %1 user
   
   failure:

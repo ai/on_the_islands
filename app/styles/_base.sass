@@ -1,0 +1,15 @@
+@import 'compass/css3'
+
+$header_height: 30px
+$page_width: 900px
+
+$green: #7ea030
+
+@mixin sized-sprite($map, $sprite)
+  background: sprite($map, $sprite) no-repeat
+  width: image-width(sprite-file($map, $sprite))
+  height: image-height(sprite-file($map, $sprite))
+
+@mixin height($height, $line_diff: 0)
+  height: $height
+  line-height: $height + $line_diff
