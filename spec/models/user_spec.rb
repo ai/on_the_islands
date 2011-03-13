@@ -30,6 +30,17 @@ describe User do
   
   end
   
+  describe "#name" do
+  
+    it "should return login on empty name" do
+      user = User.new(:login => 'LOGIN')
+      user.name.should == 'LOGIN'
+      user.name = 'NAME'
+      user.name.should == 'NAME'
+    end
+    
+  end
+  
   describe "#avatar" do
   
     it "should return gravatar URL" do

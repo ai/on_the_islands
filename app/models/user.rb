@@ -50,4 +50,8 @@ class User
     'http://gravatar.com/avatar/' +
       Digest::MD5.hexdigest(self.email) + "?s=#{size}&d=identicon"
   end
+  
+  def name
+    super || login
+  end
 end
