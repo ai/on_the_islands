@@ -32,6 +32,11 @@ class SessionsController < ApplicationController
     redirect_to root_path # TODO. Save path
   end
   
+  def failure
+    flash[:error] = t.signin.failure[params[:message]]
+    redirect_to root_url
+  end
+  
   private
   
   def auth_hash

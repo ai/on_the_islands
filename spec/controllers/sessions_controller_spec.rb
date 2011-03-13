@@ -18,9 +18,9 @@ describe SessionsController do
     it "should create new user" do
       User.count.should be_zero
       
-      get :create, :provider => 'fake'
+      get :create, provider: 'fake'
       
-      response.should redirect_to('/')
+      response.should redirect_to(root_url)
       
       User.count.should == 1
       user = assigns(:user)
@@ -42,7 +42,7 @@ describe SessionsController do
       user = Factory(:user, authentications: [{provider: 'fake', uid: 'john'}])
       User.count.should == 1
       
-      get :create, :provider => 'fake'
+      get :create, provider: 'fake'
       
       User.count.should == 1
       assigns(:user).should == user
@@ -54,7 +54,7 @@ describe SessionsController do
       user = Factory(:user, authentications: [{provider: 'fake', uid: 'john'}])
       session[:session_token] = user.session_token
       
-      get :create, :provider => 'fake'
+      get :create, provider: 'fake'
       
       assigns(:user).should have(1).authentication
     end
@@ -64,7 +64,7 @@ describe SessionsController do
       two = Factory(:user, authentications: [{ provider: 'fake', uid: 'john' }])
       session[:session_token] = one.session_token
       
-      get :create, :provider => 'fake'
+      get :create, provider: 'fake'
       
       one.reload.should have(1).authentication
       two.reload.should have(1).authentication
@@ -77,7 +77,7 @@ describe SessionsController do
       user = Factory(:user, authentications: [{provider: 'fake', uid: 'andy'}])
       session[:session_token] = user.session_token
       
-      get :create, :provider => 'fake'
+      get :create, provider: 'fake'
       
       auth = assigns(:auth)
       user.reload.should have(2).authentication
@@ -92,7 +92,7 @@ describe SessionsController do
     it "should not signin user without e-mail" do
       @fake['user_info']['email'] = nil
       
-      get :create, :provider => 'fake'
+      get :create, provider: 'fake'
       
       session[:session_token].should be_nil
       flash[:notice].should be_nil
@@ -103,7 +103,7 @@ describe SessionsController do
       user = Factory(:user, authentications: [{provider: 'fake', uid: 'andy'}])
       @fake['user_info']['email'] = user.email
       
-      get :create, :provider => 'fake'
+      get :create, provider: 'fake'
       
       session[:session_token].should be_nil
       flash[:notice].should be_nil
@@ -111,6 +111,16 @@ describe SessionsController do
       flash[:error].should include('/auth/fake')
     end
   
+  end
+  
+  describe "#failure" do
+    
+    it "should show flash on failure" do
+      get :failure, message: 'invalid_response'
+      response.should redirect_to(root_url)
+      flash[:error].should include('invalid response')
+    end
+    
   end
   
   describe "#destroy" do
@@ -121,7 +131,7 @@ describe SessionsController do
       
       post :destroy
       
-      response.should redirect_to('/')
+      response.should redirect_to(root_url)
       session[:session_token].should be_nil
     end
   

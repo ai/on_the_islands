@@ -8,5 +8,12 @@ signin:
     Your e-mail %1 is already occupied by another user. If it’s you occupied it,
     <a href="/auth/%2">Signin by %1</a> and link this account.
   add: Your account %3 on %2 was linked to %1 user
+  
+  failure:
+    timeout: Can’t signin, because server doesn’t send answer
+    service_unavailable: Can’t signin, because server is unavailable
+    invalid_credentials: Can’t signin, because request was wrong
+    invalid_response: Can’t signin, because server send invalid response
+    connection_failed: Can’t signin, because can’t recognize OpenID
 
 exit: Exit
