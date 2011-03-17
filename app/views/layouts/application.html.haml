@@ -3,6 +3,7 @@
   %head
     %meta( charset="UTF-8" )
     %title= t.name.title
+    = favicon_link_tag
     = csrf_meta_tag
     
     = include_jquery('1.5.1')
@@ -12,48 +13,53 @@
     = include_javascripts :application
     
   %body
-    - flash.each_pair do |key, message|
-      - if message
-        = "#{key}:"
-        = message.html_safe
     
-    %header
+    %header{ flash_class }
       .center
-        %a.home( href="/" rel="home" )
-          .logo
-          .eyes
-          - if signed_in?
-            = t.name.with_user(current_user.name)
-          - else
-            = t.name.header
-        - if signed_in?
-          - form_tag sessions_path, method: :delete, class: 'exit' do
-            %a( href="#" rel="submit" )= t.exit
-        - else
-          .auth
-            %h3= t.signin.title
-            %form( action="/auth/open_id" method="get" )
-              .elements
-                %input( type="url" name="openid_url" required )
-                %a( href="#" rel="submit" )
+        %a.logo( href="/" rel="home" )
+          %div
+        .bubble
+      
+      .row
+        - flash.each_pair do |type, text|
+          - if text
+            .flash{ class_if('small', strip_tags(text).length > 115), :class => type }
+              .center= text.html_safe
+        .top
+          .center
+            %a.home( href="/" )
+              - if signed_in?
+                = t.name.with_user(current_user.name)
+              - else
+                = t.name.header
+            - if signed_in?
+              - form_tag sessions_path, method: :delete, class: 'exit' do
+                %a( href="#" rel="submit" )= t.exit
+            - else
+              .auth
+                %h3= t.signin.title
+                %form( action="/auth/open_id" method="get" )
+                  .elements
+                    %input( type="url" name="openid_url" required )
+                    %a( href="#" rel="submit" )
+                      .wrap
+                        .top
+                        .bottom
+                        = t.signin.openid_submit
+                %a( href="/auth/google" )
                   .wrap
                     .top
                     .bottom
-                    = t.signin.openid_submit
-            %a( href="/auth/google" )
-              .wrap
-                .top
-                .bottom
-                Google
-            %a( href="/auth/facebook" )
-              .wrap
-                .top
-                .bottom
-                Facebook
-            %a( href="/auth/open_id" rel="openid" )
-              .wrap
-                .top
-                .bottom
-                OpenID
+                    Google
+                %a( href="/auth/facebook" )
+                  .wrap
+                    .top
+                    .bottom
+                    Facebook
+                %a( href="/auth/open_id" rel="openid" )
+                  .wrap
+                    .top
+                    .bottom
+                    OpenID
     .center
       = yield

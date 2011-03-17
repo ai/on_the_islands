@@ -3,7 +3,10 @@ javascript_compressor: closure
 javascripts:
   application:
     - public/javascripts/app/application.js
+    - public/javascripts/app/ext.js
     - public/javascripts/app/controls.js
+    - public/javascripts/app/flash.js
+    - public/javascripts/app/layout.js
     - public/javascripts/app/auth.js
 
 stylesheets:

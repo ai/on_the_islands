@@ -5,6 +5,7 @@ $layout: sprite-map("layout/*.png")
 .center
   width: $page_width
   margin: 0 auto
+  position: relative
 
 header
   position: fixed
@@ -12,119 +13,150 @@ header
   top: 0
   left: 0
   background: black
-  height: $header_height
-  a
-    color: white
-    text-decoration: none
-    text-shadow: rgba(255, 255, 255, 0) 0 0 1px
-    +transition(text-shadow, 100ms)
-    &:hover
-      text-shadow: rgba(255, 255, 255, 1) 0 0 1px
-  .home, .auth h3, .exit a, .login
-    display: block
-    +height($header_height, -1px)
-  .home
-    float: left
-    padding-left: 42px
-    position: relative
+  +transition(background, 300ms)
+  &.error, &.alert
+    background: lighten(#501d0e, 12%)
+  &.notice
+    background: lighten(#31430c, 7%)
+  .row
+    height: $header_height
+    overflow: hidden
+  .logo
+    position: absolute
+    top: 3px
+    left: 0
+    +sized-sprite($layout, logo)
+    z-index: 1
     div
       position: absolute
-      top: 3px
-      left: 0
-    .logo
-      +sized-sprite($layout, logo)
-    .eyes
-      top: 14px
+      top: 11px
       left: 9px
       +sized-sprite($layout, eyes)
       +transition(top, 100ms)
-    &:hover
-      .eyes
-        top: 12px
-  .auth
-    float: right
-    position: relative
-    h3
-      float: left
-      color: white
-      margin-right: 8px
-      font-size: 14px
-    form
-      position: absolute
-      top: 0
-      right: 0
-      width: 0
-      z-index: 1
-      overflow: hidden
-      background: black
-      .elements
-        float: right
-      input
-        float: left
-        background: white
-        color: black
-        border: none
-        height: $header_height - 10px
-        padding: 0 3px
-        margin: 5px 5px 0 20px
-        width: 200px
-      a
-        &:before
-          display: none
-        .wrap
-          padding-left: 9px
+    &:hover, &.hover
+      div
+        top: 9px
+  .bubble
+    position: absolute
+    left: 45px
+    width: $page_width - 45px
+    height: $header_height
+    background: rgba(0, 0, 0, 0.2)
+    +background(linear-gradient(top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)))
+  .flash
+    +height($header_height, -1px)
+    color: white
+    .center
+      left: 18px
+      width: $page_width - 17px - 36px
+      padding-left: 17px
+      background: inline-image("layout/alone/flash-bubble.png") no-repeat 0 14px
+    &.small
+      font-size: 12px
     a
-      float: left
+      color: white
+      &:hover
+        text-decoration: none
+  .top
+    height: $header_height
+    a
+      color: white
+      text-decoration: none
+      text-shadow: rgba(255, 255, 255, 0) 0 0 1px
+      +transition(text-shadow, 100ms)
+      &:hover, &.hover
+        text-shadow: rgba(255, 255, 255, 1) 0 0 1px
+    .home, .auth h3, .exit a, .login
       display: block
-      text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px
+      +height($header_height, -1px)
+    .home
+      float: left
+      padding-left: 42px
+    .auth
+      float: right
       position: relative
-      background: $green
-      +transition(all, 100ms)
-      &:before, &:after
-        display: block
-        content: ""
+      h3
+        float: left
+        color: white
+        margin-right: 8px
+        font-size: 14px
+      form
         position: absolute
         top: 0
-        height: 100%
-      &:before
-        background: image-url("guest/auth-arrow-left.png") no-repeat 100% 50%
-        left: 0
-        width: 8px
-      &:after
-        background: image-url("guest/auth-arrow-right.png") no-repeat 100% 50%
         right: 0
-        width: 9px
-      .wrap
-        padding: 0 14px
-        +height($header_height - 1px)
-        border-bottom: 1px solid $green
-      .top, .bottom
-        display: none
-      &:hover
-        background: lighten($green, 5%)
-        .wrap
-          border-bottom-color: lighten($green, 5%)
-      &:active
-        background: darken($green, 1%)
-        .wrap
-          border-top-color: darken($green, 10%)
-          border-bottom-color: lighten($green, 10%)
-          +box-shadow(rgba(0, 0, 0, 0.3), 0, 1px, 1px, 0, inset)
-        .top, .bottom
+        width: 0
+        z-index: 1
+        overflow: hidden
+        background: black
+        .elements
+          float: right
+        input
+          float: left
+          background: white
+          color: black
+          border: none
+          height: $header_height - 10px
+          padding: 0 3px
+          margin: 5px 5px 0 20px
+          width: 200px
+        a
+          &:before
+            display: none
+          .wrap
+            padding-left: 9px
+      a
+        float: left
+        display: block
+        text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px
+        position: relative
+        background: $green
+        +transition(all, 100ms)
+        &:before, &:after
           display: block
+          content: ""
           position: absolute
-          width: 17px
-          height: 1px
-          right: -3px
-        .top
-          top: 7px
-          +rotate(63deg)
-          background: rgba(0, 0, 0, 0.3)
-        .bottom
-          bottom: 7px
-          +rotate(-63deg)
-          background: lighten($green, 10%)
-  .exit
-    float: right
+          top: 0
+          height: 100%
+        &:before
+          background: image-url("guest/auth-arrow-left.png") no-repeat 100% 50%
+          left: 0
+          width: 8px
+        &:after
+          background: image-url("guest/auth-arrow-right.png") no-repeat 100% 50%
+          right: 0
+          width: 9px
+        .wrap
+          padding: 0 14px
+          +height($header_height - 1px)
+          border-bottom: 1px solid $green
+        .top, .bottom
+          display: none
+        &:hover
+          background: lighten($green, 5%)
+          .wrap
+            border-bottom-color: lighten($green, 5%)
+        &:active
+          background: darken($green, 1%)
+          .wrap
+            border-top-color: darken($green, 10%)
+            border-bottom-color: lighten($green, 10%)
+            +box-shadow(rgba(0, 0, 0, 0.3) 0 1px 1px 0 inset)
+          .top, .bottom
+            display: block
+            position: absolute
+            width: 17px
+            height: 1px
+            right: -3px
+          .top
+            top: 7px
+            +rotate(63deg)
+            background: rgba(0, 0, 0, 0.3)
+          .bottom
+            bottom: 7px
+            +rotate(-63deg)
+            background: lighten($green, 10%)
+    .exit
+      float: right
+      
 body
   padding-top: $header_height + 10px

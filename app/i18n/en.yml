@@ -10,7 +10,7 @@ signin:
   empty_email:
     Your OpenID doesn’t provide e-mail. Use another signin method.
   occupied_email:
-    Your e-mail %1 is already occupied by another user. If it’s you occupied it,
+    E-mail %1 is already occupied. If it’s you occupied it,
     <a href="/auth/%2">sign in by %1</a> and link this account.
   add: Your account %3 on %2 was linked to %1 user
   

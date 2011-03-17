@@ -6,4 +6,13 @@ module ApplicationHelper
       "lib/development/jquery-#{version}")
   end
   
+  def flash_class
+    show = flash.reject { |a, b| b.nil? }.to_a
+    show.empty? ? {} : { class: show.first.first }
+  end
+  
+  def class_if(cls, check)
+    check ? { class: cls } : { }
+  end
+  
 end
